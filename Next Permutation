@@ -3,37 +3,27 @@ class Solution
     void nextPermutation(int perm[], int N)
 	{    
 	    // code here
-        int flag=0;
         int ind=0;
-        for(int i=N-1;i>0;i--){
+        int i;
+        for(i=N-1;i>0;i--){
             if(perm[i-1]<perm[i]){
                 ind=i-1;
-                flag=1;
                 break;
             }
         }
-        if(flag==0){
+        if(i==0){
             Arrays.sort(perm);
         }
         else{
-            int t=perm[ind];
-            int min=Integer.MAX_VALUE;
-            int k=0;
-            for(int i=ind+1;i<N;i++){
-                if(perm[i]>=perm[ind] && min>=perm[i])
-                   min=perm[i];
-                   k=i;
+            int min=ind+1;
+            for(int j=ind+2;j<N;j++){
+                if(perm[j]>perm[ind] && perm[min]>perm[j])
+                   min=j;
             }
-            perm[ind]=perm[k];
-            perm[k]=t;
-            int arr[]=new int[N-ind-1];
-            int k1=0;
-            for(int i=ind+1;i<N;i++)
-               arr[k1++]=perm[i];
-            Arrays.sort(arr);
-            int k2=0;
-            for(int i=ind+1;i<N;i++)
-               perm[i]=arr[k2++];
+            int t=perm[ind];
+            perm[ind]=perm[min];
+            perm[min]=t;
+            Arrays.sort(perm,ind+1,N);
         }
 	}
 } 
