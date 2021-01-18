@@ -1,8 +1,6 @@
-class Solution
-{
-    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
-    {
-        // Code here
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int V=graph.length;
         int visit[]=new int[V];
         Queue<Integer> q=new LinkedList<>();
         for(int k=0;k<V;k++){
@@ -12,14 +10,14 @@ class Solution
         visit[k]=1;
         while(!q.isEmpty()){
             int p=q.remove();
-            for(int i=0;i<adj.get(p).size();i++){
-                if(visit[adj.get(p).get(i)]==0)
+            for(int i=0;i<graph[p].length;i++){
+                if(visit[graph[p][i]]==0)
                 {
-                    visit[adj.get(p).get(i)]=visit[p]==1?-1:1;
-                    q.add(adj.get(p).get(i));
+                    visit[graph[p][i]]=visit[p]==1?-1:1;
+                    q.add(graph[p][i]);
                 }
                 else{
-                    if(visit[adj.get(p).get(i)]==visit[p])
+                    if(visit[graph[p][i]]==visit[p])
                         return false;
                 }
             }
