@@ -1,0 +1,23 @@
+class solve {
+    public static boolean check(int j,int[] color,int i,List<Integer>[] G){
+        for(int k=0;k<G[j].size();k++){
+            if(color[G[j].get(k)]==i)
+                return false;
+        }
+        return true;
+    }
+    public static boolean graphColoring(List<Integer>[] G, int[] color, int i, int C) {
+        // Your code here
+        if(i==color.length)
+           return true;
+        for(int l=1;l<=C;l++){
+            if(check(i,color,l,G)){
+                color[i]=l;
+                if(graphColoring(G,color,i+1,C))
+                     return true;
+                color[i]=0;
+            }
+        }
+      return false;
+    }
+}
