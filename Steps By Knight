@@ -1,0 +1,60 @@
+class Solution
+{
+    public int ind(int i,int j,int col){
+        return i*col+j;
+    }
+    public int minStepToReachTarget(int KnightPos[], int TargetPos[], int N)
+    {
+        // Code here
+        Queue<Integer> q=new LinkedList<>();
+        HashSet<Integer> set=new HashSet<>();
+        q.add(ind(KnightPos[0]-1,KnightPos[1]-1,N));
+        set.add(ind(KnightPos[0]-1,KnightPos[1]-1,N));
+        int c=-1;
+        while(!q.isEmpty()){
+            c++;
+            int n=q.size();
+            for(int i=0;i<n;i++){
+            int p=q.remove();
+            int x=p/N;
+            int y=p%N;
+            //System.out.println(x+" "+y+" "+c);
+            if(x==TargetPos[0]-1 && y==TargetPos[1]-1)
+               return c;
+            if(x-2>=0 && y+1<N && !set.contains(ind(x-2,y+1,N))){
+               q.add(ind(x-2,y+1,N));
+               set.add(ind(x-2,y+1,N));
+            }
+            if(x-2>=0 && y-1>=0 && !set.contains(ind(x-2,y-1,N))){
+               q.add(ind(x-2,y-1,N));
+               set.add(ind(x-2,y-1,N));
+            }
+            if(x+2<N && y+1<N && !set.contains(ind(x+2,y+1,N))){
+               q.add(ind(x+2,y+1,N));
+               set.add(ind(x+2,y+1,N));
+            }
+            if(x+2<N && y-1>=0 && !set.contains(ind(x+2,y-1,N))){
+               q.add(ind(x+2,y-1,N));
+               set.add(ind(x+2,y-1,N));
+            }
+            if(y-2>=0 && x+1<N && !set.contains(ind(x+1,y-2,N))){
+               q.add(ind(x+1,y-2,N));
+               set.add(ind(x+1,y-2,N));
+            }
+            if(y-2>=0 && x-1>=0 && !set.contains(ind(x-1,y-2,N))){
+               q.add(ind(x-1,y-2,N));
+               set.add(ind(x-1,y-2,N));
+            }
+            if(y+2<N && x-1>=0 && !set.contains(ind(x-1,y+2,N))){
+               q.add(ind(x-1,y+2,N));
+               set.add(ind(x-1,y+2,N));
+            }
+            if(y+2<N && x+1<N && !set.contains(ind(x+1,y+2,N))){
+               q.add(ind(x+1,y+2,N));
+               set.add(ind(x+1,y+2,N));
+            }
+            }
+        }
+        return -1;
+    }
+}
