@@ -3,6 +3,13 @@ class Solution
     public int ind(int i,int j,int col){
         return i*col+j;
     }
+    public void check(int x,int y,int N,Queue<Integer> q,HashSet<Integer> set){
+        if(x>=0 && y>=0 && x<N && y<N &&!set.contains(ind(x,y,N)))
+        {
+            q.add(ind(x,y,N));
+            set.add(ind(x,y,N));
+        }
+    }
     public int minStepToReachTarget(int KnightPos[], int TargetPos[], int N)
     {
         // Code here
@@ -21,38 +28,14 @@ class Solution
             //System.out.println(x+" "+y+" "+c);
             if(x==TargetPos[0]-1 && y==TargetPos[1]-1)
                return c;
-            if(x-2>=0 && y+1<N && !set.contains(ind(x-2,y+1,N))){
-               q.add(ind(x-2,y+1,N));
-               set.add(ind(x-2,y+1,N));
-            }
-            if(x-2>=0 && y-1>=0 && !set.contains(ind(x-2,y-1,N))){
-               q.add(ind(x-2,y-1,N));
-               set.add(ind(x-2,y-1,N));
-            }
-            if(x+2<N && y+1<N && !set.contains(ind(x+2,y+1,N))){
-               q.add(ind(x+2,y+1,N));
-               set.add(ind(x+2,y+1,N));
-            }
-            if(x+2<N && y-1>=0 && !set.contains(ind(x+2,y-1,N))){
-               q.add(ind(x+2,y-1,N));
-               set.add(ind(x+2,y-1,N));
-            }
-            if(y-2>=0 && x+1<N && !set.contains(ind(x+1,y-2,N))){
-               q.add(ind(x+1,y-2,N));
-               set.add(ind(x+1,y-2,N));
-            }
-            if(y-2>=0 && x-1>=0 && !set.contains(ind(x-1,y-2,N))){
-               q.add(ind(x-1,y-2,N));
-               set.add(ind(x-1,y-2,N));
-            }
-            if(y+2<N && x-1>=0 && !set.contains(ind(x-1,y+2,N))){
-               q.add(ind(x-1,y+2,N));
-               set.add(ind(x-1,y+2,N));
-            }
-            if(y+2<N && x+1<N && !set.contains(ind(x+1,y+2,N))){
-               q.add(ind(x+1,y+2,N));
-               set.add(ind(x+1,y+2,N));
-            }
+            check(x-2,y+1,N,q,set);
+            check(x-2,y-1,N,q,set);
+            check(x+2,y+1,N,q,set);
+            check(x+2,y-1,N,q,set);
+            check(x+1,y-2,N,q,set);
+            check(x-1,y-2,N,q,set);
+            check(x-1,y+2,N,q,set);
+            check(x+1,y+2,N,q,set);
             }
         }
         return -1;
